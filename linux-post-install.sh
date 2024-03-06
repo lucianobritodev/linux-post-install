@@ -101,6 +101,21 @@ install_docker() {
 
 }
 
+install_git() {
+
+	if ! [[ -x $(which git) ]]; then
+
+		# Install
+		echo -e "${LOG_INFO} Instalando Git..."
+		echo "$PASSWORD" | sudo -S apt install git -y
+
+		if ! [[ -x $(which git) ]]; then
+			echo -e "${LOG_ERROR} Git ${ERROR_MESSAGE}"
+		fi
+	fi
+
+}
+
 install_team_viewer() {
 
 	if ! [[ -x $(which teamviewer) ]]; then
@@ -134,21 +149,6 @@ install_dropbox() {
 			echo -e "${LOG_ERROR} Dropbox ${ERROR_MESSAGE}"
 		fi
 	fi
-}
-
-install_git() {
-
-	if ! [[ -x $(which git) ]]; then
-
-		# Install
-		echo -e "${LOG_INFO} Instalando Git..."
-		echo "$PASSWORD" | sudo -S apt install git -y
-
-		if ! [[ -x $(which git) ]]; then
-			echo -e "${LOG_ERROR} Git ${ERROR_MESSAGE}"
-		fi
-	fi
-
 }
 
 install_libreoffice() {
@@ -672,6 +672,9 @@ install_deb_apps() {
 	# Install utils
 	install_basic_packages
 
+	# Install GIT
+	install_git
+
 	# Install Docker
 	install_docker
 
@@ -680,9 +683,6 @@ install_deb_apps() {
 
 	#Install Dropbox
 	install_dropbox
-
-	# Install GIT
-	install_git
 
 	# Install LibreOffice
 	install_libreoffice
