@@ -116,21 +116,6 @@ install_docker() {
 
 }
 
-install_git() {
-
-	if ! [[ -x $(which git) ]]; then
-
-		# Install
-		echo -e "${LOG_INFO} Instalando Git..."
-		echo "$PASSWORD" | sudo -S apt install git -y
-
-		if ! [[ -x $(which git) ]]; then
-			echo -e "${LOG_ERROR} Git ${ERROR_MESSAGE}"
-		fi
-	fi
-
-}
-
 install_team_viewer() {
 
 	if ! [[ -x $(which teamviewer) ]]; then
